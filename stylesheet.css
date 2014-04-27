@@ -8,3 +8,8 @@ ul{
 p{
     padding: 5px;
 }
+#menulist li{
+    display:inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
