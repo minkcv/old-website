@@ -1,8 +1,8 @@
 echo '
     <div id="menu">
     <ul id="menulist">
-    <li> <a href="games.php">Games</a> </li>
-    <li> <a href="index.php">About</a> </li>
+    <li> <a href="games.html">Games</a> </li>
+    <li> <a href="index.html">About</a> </li>
     </ul>
     </div>
 ';
