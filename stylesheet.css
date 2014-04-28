@@ -9,12 +9,6 @@ li {
 h2 {
     margin-top: 5px;
 }
-#contentlist {
-    list-style-type: none;
-}
-#contentlist li{
-    padding: 2px;
-}
 p{
     padding: 1px;
     margin-top: 5px;
@@ -33,4 +27,3 @@ p{
     background-color: #dddddd;
     height: 30px;
 }
-
