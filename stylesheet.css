@@ -57,7 +57,4 @@ p{
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
-.footer{
-    position: absolute;
-    bottom: auto;
-}
+.footer { position:absolute; width:100%; height:100px; }
