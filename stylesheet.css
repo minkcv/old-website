@@ -58,5 +58,6 @@ p{
     border-radius: 3px;
 }
 .footer{
-    position: bottom;
+    position: absolute;
+    bottom: 5px;
 }
