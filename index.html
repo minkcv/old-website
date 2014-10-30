@@ -1,25 +1,65 @@
 <html>
     <head>
         <link rel="stylesheet" href="stylesheet.css" type="text/css"> 
-        
-        <title>Games and stuff</title>
+        <link rel="stylesheet" href="bootstrap.min.css" type="text/css">        
+        <script type="text/javascript" src="jquery-1.11.1.js"></script>
+        <script type="text/javascript" src="jquery.collagePlus.min.js"></script>
+        <script type="text/javascript" src="jquery.removeWhitespace.min.js"></script>
+        <script type="text/javascript" src="jquery.collageCaption.min.js"></script>
+        <script type="text/javascript">
+
+        // All images need to be loaded for this plugin to work so
+        // we end up waiting for the whole window to load in this example
+        $(window).load(function () {
+            $(document).ready(function(){
+                collage();
+                $('.Collage').collageCaption();
+            });
+        });
+
+
+        // Here we apply the actual CollagePlus plugin
+        function collage() {
+            $('.Collage').removeWhitespace().collagePlus(
+                {
+                    'fadeSpeed'     : 2000,
+                    'targetHeight'  : 500,
+		    'allowPartialLastRow' : true,
+		    'fadeSpeed' : "slow"
+                }
+            );
+        };
+
+        // This is just for the case that the browser window is resized
+        var resizeTimer = null;
+        $(window).bind('resize', function() {
+            // hide all the images until we resize them
+            $('.Collage .Image_Wrapper').css("opacity", 0);
+            // set a timer to re-apply the plugin
+            if (resizeTimer) clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(collage, 200);
+        });
+
+        </script>
+        <title>Programs and stuff</title>
     </head>
-    <body>
+    <body style="background-color: #dddddd;">
         <h1>Another Will Smith's Home Page</h1>
         <div id="menu">
             <ul id="menulist">
-                <li><a href="index.html">About</a></li>
-                <li><a href="games.html">Games</a></li>
-                <li><a href="videos.html">Videos</a></li>
-                <li><a href="pictures.html">Pictures</a></li>
+                <li> <a href="http://twitter.com/minkcv">@minkcv</a> </li>
+                <li> <a href="http://github.com/minkcv">GitHub</a> </li>
+                <li> <a href="http://minkcv.itch.io">minkcv.itch.io</a> </li>
             </ul>
         </div>
-        <ul>
-            <li> Hi, I'm a digital artist and programmer. </li>
-            <li> <a href="http://twitter.com/minkcv">@minkcv</a> </li>
-            <li> <a href="http://github.com/minkcv">GitHub</a> </li>
-            <li> <a href="http://minkcv.itch.io">minkcv.itch.io</a> </li>
-        </ul>
+        <div class="Collage">
+            <div class="Image_Wrapper" data-caption="Triangulis"><a href='http://minkcv.itch.io/triangulis'><img src="images/triangulis.png"></a></div>
+            <div class="Image_Wrapper" data-caption="Terrain"><a href='downloads/terrain.png'><img src="images/terrain_thumb.png"></a></div>
+            <div class="Image_Wrapper" data-caption="Koch Snowflake"><a href='downloads/snowflake.zip'><img src="images/snowflake.png"></a></div>
+            <div class="Image_Wrapper" data-caption="OpenGL Contour Lines"><a href='downloads/contour.zip'><img src="images/topo.png"></a></div>
+            <div class="Image_Wrapper" data-caption="Tron Light Cycles"><a href='downloads/tron-color.png'><img src="images/tron_thumb.png"></a></div>
+            <div class="Image_Wrapper" data-caption="Moon Wallpaper"><a href='downloads/nightwallpaper.png'><img src="images/night_thumb.png"></a></div>
+        </div>
         <script type="text/javascript">
 
               var _gaq = _gaq || [];
