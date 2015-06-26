@@ -81,6 +81,13 @@ $(function(){
         return str.trim();
     }
 
+    //check for connection to server every 10 seconds
+    setInterval(function() {
+        if(! socket.connected){
+            document.getElementById('gamestate').innerHTML = "Server not reachable";
+        }
+    }, 10000);
+
 	$("#username_form").submit(function(){
         console.log('submitted username');
         if(gamestate != 1 && playernumber == 0){
