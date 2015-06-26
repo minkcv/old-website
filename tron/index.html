@@ -35,6 +35,10 @@ body {
     width: 200px;
     word-wrap: break-word;
 }
+#chat_messages ul {
+    list-style-type: none;
+    padding-left: 5px;
+}
 #game {
     float: left;
     border: thick solid #000000;
@@ -99,8 +103,8 @@ $(function(){
         return false;
     });
     
-    socket.on('chat', function(message){
-        $("#chat_messages").append($("<li>").text(message));
+    socket.on('chat', function(messagedata){
+        $("#chat_messages").append($("<li>").text(messagedata.source + ": " + messagedata.message));
         $("#chat_messages").scrollTop($("#chat_messages")[0].scrollHeight);
     });
 
@@ -250,7 +254,7 @@ $(function(){
     </div>
     <div id='chat'>
         <h2>Chat</h2>
-        <ul id='chat_messages' style="list-style-type: none;"></ul>
+        <ul id='chat_messages'> </ul>
         <form id='chat_form' action="">
             <input id='chat_message' autocomplete="off" /><button>Send</button>
         </form>
