@@ -17,10 +17,20 @@ body {
     padding-right: 10px;
     margin-left: 10px;
 }
+#chat {
+    float: left;
+    height: 500px;
+    padding: 10px;
+    margin-right: 10px;
+}
+#chat_form {
+    margin-top: auto;
+    bottom: 0px;
+}
 #game {
     float: left;
-    border: thick;
-    border-color: #b8b8b8;
+    border: thick solid #000000;
+    background-color: #000000;
     width: 600px;
     height: 600px;
     padding-top: 0px;
@@ -59,7 +69,8 @@ $(function(){
         return str.trim();
     }
 
-	$('form').submit(function(){
+	$('#username_form').submit(function(){
+        console.log('submitted username');
         if(gamestate != 1 && playernumber == 0){
             var username = sanitizeString($('#username').val());
             socket.emit('join', username);
@@ -70,6 +81,26 @@ $(function(){
         }
 		return false;
 	});
+
+    $('#chat_form').submit(function(){
+            console.log(gamestate);
+        if(gamestate != 0){
+            socket.emit('chat', sanitizeString($('#chat_message').val()));
+            $('#chat_message').val('');
+        }
+        return false;
+    });
+    
+    socket.on('chat', function(message){
+        $('#chat_messages').append($('<li>').text(message));
+    });
+
+    socket.on('disconnect', function(reason){
+        if(reason == "other player disconnected"){
+            gamestate = 0;
+            document.getElementById('gamestate').innerHTML = "Other player disconnected";
+        }
+    });
   
     socket.on('game data', function(servergamedata){
         x1 = servergamedata.x1;
@@ -191,22 +222,29 @@ $(function(){
 });
 </script>
 <body>
-<div id='header'>
-<h1>Multi-Tron</h1>
-<p>A multiplayer tron clone in javascript</p>
-</div>
-<div id='instructions'>
-<h2>Pick a Username</h2>
-<form action="">
-<input id="username" autocomplete="off" /><button>Send</button>
-</form>
-<h2>Game Info:</h2>
-<div id="gamestate"></div>
-<h2>Game Result:</h2>
-<div id="result"></div>
-</div>
-<div id='game'>
-<canvas id="gamecanvas" width="600" height="600"></canvas>
-</div>
+    <div id='header'>
+        <h1>Multi-Tron</h1>
+        <p>A multiplayer tron clone in javascript by <a style="color: #f8f8f8" href="../index.html">Will Smith</a></p>
+    </div>
+    <div id='instructions'>
+        <h2>Pick a Username</h2>
+        <form id='username_form' action="">
+            <input id="username" autocomplete="off" /><button>Send</button>
+        </form>
+        <h2>Game Info</h2>
+        <div id="gamestate"></div>
+        <h2>Game Result</h2>
+        <div id="result"></div>
+    </div>
+    <div id='game'>
+        <canvas id="gamecanvas" width="600" height="600"></canvas>
+    </div>
+    <div id='chat'>
+        <h2>Chat</h2>
+        <form id='chat_form' action="">
+            <input id='chat_message' autocomplete="off" /><button>Send</button>
+        </form>
+        <ul id='chat_messages' style="list-style-type: none;"></ul>
+    </div>
 </body>
 </html>
