@@ -88,15 +88,22 @@ $(function(){
         }
     }, 10000);
 
+    $("#play_again_form").submit(function(){
+        if(gamestate == 2){
+            socket.emit('play again');
+        }
+        init();
+        return false;
+    });
+
 	$("#username_form").submit(function(){
-        console.log('submitted username');
         if(gamestate != 1 && playernumber == 0){
             var username = sanitizeString($('#username').val());
             socket.emit('join', username);
             gamestate = 0
             init();
         }else{
-            alert("you already picked a username, refresh to play again");
+            alert("you already picked a username");
         }
 		return false;
 	});
@@ -108,6 +115,10 @@ $(function(){
             $("#chat_message").val("");
         }
         return false;
+    });
+
+    socket.on('other player again', function(){
+        document.getElementById('other_player_again').innerHTML = "Other player wants to play again";
     });
     
     socket.on('chat', function(messagedata){
@@ -134,10 +145,8 @@ $(function(){
         if(joinresponse == "welcome player 1"){
             playernumber = 1;
             document.getElementById('gamestate').innerHTML = "Waiting for player 2";
-            //init();
         }else if(joinresponse == "welcome player 2"){
             playernumber = 2;
-            //init();
         }else if(joinresponse== "no available games"){
             playernumber = 3;
         }else if(joinresponse == "username already taken"){
@@ -152,6 +161,7 @@ $(function(){
         console.log("game state from server: " + serverstate);
         gamestate = serverstate;
         if(gamestate == 1){
+            document.getElementById('other_player_again').innerHTML = "";
             if(playernumber == 1){
                 document.getElementById('gamestate').innerHTML = player1name + " vs " + player2name + ". You are Red";
                 document.getElementById('game').style.border = "thick solid #FF0000";
@@ -167,6 +177,7 @@ $(function(){
             document.getElementById('result').innerHTML = winner + " Wins!";
         else
             document.getElementById('result').innerHTML = "Its a tie.";
+        document.getElementById('play_again').style.display = "inline";
     });
 
 
@@ -198,13 +209,18 @@ $(function(){
 	}, false);
 
 	var init = function() {
+        blocks = {};
+        x1 = -1;
+        y1 = -1;
+        x2 = -1;
+        y2 = -1;
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
         if(playernumber == 1)
             direction = 2;
         else if(playernumber == 2)
             direction = 0;
 
-        ctx.fillStyle = "#000000";
-        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        return;
 	}
 
 	var render = function() {
@@ -255,6 +271,13 @@ $(function(){
         <div id="gamestate"></div>
         <h2>Game Result</h2>
         <div id="result"></div>
+        <div id="play_again" style="display: none;">
+            <h2>Play Again?</h2>
+            <form id="play_again_form" action="">
+                <button>Play again</button>
+            </form>
+            <p id='other_player_again'></p>
+        </div>
     </div>
     <div id='game'>
         <canvas id="gamecanvas" width="600" height="600"></canvas>
