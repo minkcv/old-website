@@ -1,17 +1,17 @@
 h1{
     text-align: center;
 }
-a:link{
-    color: #333;
+#menulist a:link{
+    color: #eee;
 }
-a:visited{
-    color: #444;
+#menulist a:visited{
+    color: #ddd;
 }
-a:hover{
-    color: #333;
+#menulist a:hover{
+    color: #eee;
 }
-a:active{
-    color: #444;
+#menulist a:active{
+    color: #ddd;
 }
 ul {
     text-align: center;
