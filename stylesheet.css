@@ -1,6 +1,18 @@
 h1{
     text-align: center;
 }
+#menulist a:link{
+    color: #eee;
+}
+#menulist a:visited{
+    color: #ddd;
+}
+#menulist a:hover{
+    color: #eee;
+}
+#menulist a:active{
+    color: #ddd;
+}
 ul {
     text-align: center;
 }
