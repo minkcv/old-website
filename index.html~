@@ -59,7 +59,7 @@
         </div>
         <div class="content">
         <div class="Collage">
-        	<div class="Image_Wrapper" data-caption="Unit 01 Pinball"><a href='evapinball/index.html'><img src="images/pinball_thumb.png"></a></div>
+        	<div class="Image_Wrapper" data-caption="Unit 01 Pinball"><a href='evapinball/'><img src="images/pinball_thumb.png"></a></div>
             <div class="Image_Wrapper" data-caption="Isomorphic"><a href='https://minkcv.itch.io/isomorphic'><img src="images/iso_thumb.png"></a></div>
             <div class="Image_Wrapper" data-caption="Digital Art Project"><a href='https://minkcv.github.io/DigitalArtProject2/index.html'><img src="images/digitalart_thumb.png"></a></div>
             <div class="Image_Wrapper" data-caption="MTRD"><a href='http://gamejolt.com/games/mtrd/94843'><img src="images/metroid_thumb.png"></a></div>
